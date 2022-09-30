@@ -2,7 +2,6 @@ import React from "react"
 
 export default function SettingsBtn() {
   return (
-    <>
       <svg
         width="32"
         height="32"
@@ -35,6 +34,5 @@ export default function SettingsBtn() {
           strokeLinecap={"round"}
         />
       </svg>
-    </>
   )
 }
