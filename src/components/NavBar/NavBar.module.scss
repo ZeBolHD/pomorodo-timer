@@ -5,7 +5,7 @@
   width: 296px;
   height: 80px;
   border-radius: 50px;
-  background-color: #30475e;
+  background-color: var(--color-bg-light);
   align-items: center;
 
   .active {
@@ -13,7 +13,7 @@
     position: absolute;
     width: 54px;
     height: 54px;
-    background-color: #f05454;
+    background-color: var(--color-primary);
     border-radius: 50%;
     transform: translateY(-2px);
     transform: translateX(74px);
