@@ -1,0 +1,13 @@
+.buttons {
+  margin: 3rem auto 0 auto;
+  display: flex;
+  justify-content: space-between;
+  width: 200px;
+
+  svg {
+    user-select: none;
+    cursor: pointer;
+    width: 76px;
+    height: 76px;
+  }
+}

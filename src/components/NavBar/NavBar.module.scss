@@ -1,0 +1,31 @@
+.nav {
+  display: flex;
+  justify-content: space-around;
+  margin: 25px auto;
+  width: 296px;
+  height: 80px;
+  border-radius: 50px;
+  background-color: #30475e;
+  align-items: center;
+
+  .active {
+    z-index: 0;
+    position: absolute;
+    width: 54px;
+    height: 54px;
+    background-color: #f05454;
+    border-radius: 50%;
+    transform: translateY(-2px);
+    transform: translateX(74px);
+  }
+
+  .button {
+    cursor: pointer;
+    z-index: 999;
+
+    svg {
+      width: 30px;
+      height: 30px;
+    }
+  }
+}
