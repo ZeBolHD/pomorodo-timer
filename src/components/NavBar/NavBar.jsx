@@ -7,11 +7,11 @@ import TimerBtn from "./Icons/TimerBtn"
 
 const variants = {
   timerActive: {
-    transform: "translate(74px, -2px)",
+    transform: "translate(74px, 0px)",
   },
 
   settingsActive: {
-    transform: "translate(-74px, -2px)",
+    transform: "translate(-74px, 0px)",
   },
 }
 

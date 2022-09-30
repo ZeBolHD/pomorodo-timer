@@ -8,7 +8,6 @@ export default function AppSettings({
   timerDuration,
 }) {
   return (
-    <>
       <AnimatePresence>
         {!activeTab && (
           <motion.div
@@ -33,6 +32,5 @@ export default function AppSettings({
           </motion.div>
         )}
       </AnimatePresence>
-    </>
   )
 }

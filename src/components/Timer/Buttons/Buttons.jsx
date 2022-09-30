@@ -40,7 +40,6 @@ export default function Buttons({
   }
 
   return (
-    <>
       <div className={styles.buttons}>
         <motion.div
           style={{ position: "relative" }}
@@ -64,6 +63,5 @@ export default function Buttons({
           </motion.div>
         )}
       </div>
-    </>
   )
 }

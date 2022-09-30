@@ -2,7 +2,6 @@ import React from "react"
 
 export default function PauseBtn() {
   return (
-    <div>
       <svg
         width="76"
         height="76"
@@ -26,6 +25,5 @@ export default function PauseBtn() {
           strokeLinejoin={"round"}
         />
       </svg>
-    </div>
   )
 }

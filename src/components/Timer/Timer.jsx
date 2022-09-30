@@ -40,7 +40,7 @@ export default function Timer({
         transition={{ duration: 0.15 }}
       >
         <div className={styles.wrapper}>
-          <div className={styles.timer_shadow}></div>
+          <div className={styles.timerShadow}></div>
           <CountdownCircleTimer
             key={key}
             size={250}

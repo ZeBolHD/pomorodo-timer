@@ -4,7 +4,6 @@ import styles from "./Header.module.scss"
 
 export default function Header({ activeTab, initialStart }) {
   return (
-    <>
       <div className={styles.header}>
         {activeTab && (
           <motion.div
@@ -74,6 +73,5 @@ export default function Header({ activeTab, initialStart }) {
           )}
         </AnimatePresence>
       </div>
-    </>
   )
 }

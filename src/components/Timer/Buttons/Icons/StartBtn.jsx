@@ -2,7 +2,6 @@ import React from "react"
 
 export default function StartBtn() {
   return (
-    <div>
       <svg
         width="76"
         height="76"
@@ -23,6 +22,5 @@ export default function StartBtn() {
           strokeLinejoin={"round"}
         />
       </svg>
-    </div>
   )
 }

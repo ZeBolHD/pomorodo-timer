@@ -2,7 +2,6 @@ import React from "react"
 
 export default function RewindBtn() {
   return (
-    <>
       <svg
         width="76"
         height="76"
@@ -22,6 +21,5 @@ export default function RewindBtn() {
           strokeLinecap={"round"}
         />
       </svg>
-    </>
   )
 }

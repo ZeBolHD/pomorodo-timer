@@ -2,7 +2,6 @@ import React from "react"
 
 export default function TimerBtn() {
   return (
-    <>
       <svg
         width="30"
         height="30"
@@ -19,6 +18,5 @@ export default function TimerBtn() {
           strokeLinejoin={"round"}
         />
       </svg>
-    </>
   )
 }

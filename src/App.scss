@@ -1,5 +1,14 @@
 @import url("https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500&display=swap");
 
+// Add colors to css variables
+:root {
+  --color-primary: #f05454;
+  --color-secondary: #f5f5f5;
+  --color-bg: #222831;
+  --color-bg-light: #30475e;
+  --color-text-primary: #dddddd;
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -9,9 +18,9 @@
 body {
   padding: 0;
   margin: 0;
-  background: #222831;
+  background: var(--color-bg);
   font-family: "Rubik";
-  color: #dddddd;
+  color: var(--color-text-primary);
   height: 100%;
   width: 100%;
   overflow: hidden;
