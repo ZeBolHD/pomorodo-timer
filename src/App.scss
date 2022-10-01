@@ -3,10 +3,14 @@
 // Add colors to css variables
 :root {
   --color-primary: #f05454;
+  --color-primary-dark: #571a1a;
   --color-secondary: #f5f5f5;
   --color-bg: #222831;
   --color-bg-light: #30475e;
   --color-text-primary: #dddddd;
+
+  --color-input-bg-progress: #dddddd;
+  --color-input-thumb: #d9d9d9;
 }
 
 * {

@@ -1,10 +1,10 @@
-import React from "react"
-import styles from "./Buttons.module.scss"
-import { motion } from "framer-motion"
+import React from "react";
+import styles from "./Buttons.module.scss";
+import { motion } from "framer-motion";
 
-import PauseBtn from "./Icons/PauseBtn"
-import StartBtn from "./Icons/StartBtn"
-import RewindBtn from "./Icons/RewindBtn"
+import PauseBtn from "./Icons/PauseBtn";
+import StartBtn from "./Icons/StartBtn";
+import RewindBtn from "./Icons/RewindBtn";
 
 const variants = {
   beforeStartLeft: {
@@ -25,43 +25,44 @@ const variants = {
     right: 0,
     transform: "translate(0%, 0)",
   },
-}
+};
 
 export default function Buttons({
   pause,
   setPause,
-  timerDuration,
+  onComplete,
   initialStart,
   setInitialStart,
 }) {
   const start = () => {
-    !initialStart && setInitialStart(!initialStart)
-    setPause(!pause)
-  }
+    !initialStart && setInitialStart(!initialStart);
+    setPause(!pause);
+  };
 
   return (
-      <div className={styles.buttons}>
-        <motion.div
-          style={{ position: "relative" }}
-          variants={variants}
-          initial="beforeStartLeft"
-          animate={!initialStart ? "beforeStartLeft" : "afterStartLeft"}
-          transition={{ type: "spring", damping: 20, stiffness: 350 }}
-          onClick={start}
-        >
-          {!pause ? <StartBtn /> : <PauseBtn />}
-        </motion.div>
+    <div className={styles.buttons}>
+      <motion.div
+        style={{ position: "relative" }}
+        variants={variants}
+        initial="beforeStartLeft"
+        animate={!initialStart ? "beforeStartLeft" : "afterStartLeft"}
+        transition={{ type: "spring", damping: 20, stiffness: 350 }}
+        onClick={start}
+      >
+        {!pause ? <StartBtn /> : <PauseBtn />}
+      </motion.div>
 
-        {initialStart && (
-          <motion.div
-            variants={variants}
-            initial="beforeStartRight"
-            animate="afterStartRight"
-            transition={{ type: "spring", damping: 20, stiffness: 350 }}
-          >
-            <RewindBtn />
-          </motion.div>
-        )}
-      </div>
-  )
+      {initialStart && (
+        <motion.div
+          variants={variants}
+          initial="beforeStartRight"
+          animate="afterStartRight"
+          transition={{ type: "spring", damping: 20, stiffness: 350 }}
+          onClick={onComplete}
+        >
+          <RewindBtn />
+        </motion.div>
+      )}
+    </div>
+  );
 }

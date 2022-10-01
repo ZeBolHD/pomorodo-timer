@@ -1,9 +1,9 @@
-import React from "react"
-import { motion } from "framer-motion"
-import styles from "./NavBar.module.scss"
+import React from "react";
+import { motion } from "framer-motion";
+import styles from "./NavBar.module.scss";
 
-import SettingsBtn from "./Icons/SettingsBtn"
-import TimerBtn from "./Icons/TimerBtn"
+import SettingsBtn from "./Icons/SettingsBtn";
+import TimerBtn from "./Icons/TimerBtn";
 
 const variants = {
   timerActive: {
@@ -13,7 +13,7 @@ const variants = {
   settingsActive: {
     transform: "translate(-74px, 0px)",
   },
-}
+};
 
 export default function NavBar({ activeTab, setActiveTab }) {
   return (
@@ -38,5 +38,5 @@ export default function NavBar({ activeTab, setActiveTab }) {
         <TimerBtn />
       </div>
     </nav>
-  )
+  );
 }

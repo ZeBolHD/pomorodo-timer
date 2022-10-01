@@ -1,26 +1,46 @@
-import React from "react"
-import styles from "./Timer.module.scss"
-import { motion } from "framer-motion"
-import { CountdownCircleTimer } from "react-countdown-circle-timer"
-import Buttons from "./Buttons/Buttons"
+import React from "react";
+import styles from "./Timer.module.scss";
+import { motion } from "framer-motion";
+import { CountdownCircleTimer } from "react-countdown-circle-timer";
+import Buttons from "./Buttons/Buttons";
 
 export default function Timer({
-  timerDuration,
+  rounds,
+  focusDuration,
+  breakDuration,
+  isBreak,
+  setIsBreak,
   activeTab,
   initialStart,
   setInitialStart,
 }) {
-  const [pause, setPause] = React.useState(false)
-  const [key, setKey] = React.useState(0)
+  const [pause, setPause] = React.useState(false);
+  const [key, setKey] = React.useState(0);
+
+  const [roundCurrent, setRoundCurrent] = React.useState(1);
+
+  const onComplete = () => {
+    setRoundCurrent((prev) => prev + 1);
+    if (roundCurrent < rounds * 2 - 1) {
+      setIsBreak(!isBreak);
+    } else {
+      setRoundCurrent(1);
+      setKey((prev) => prev + 1);
+      setPause(false);
+      setInitialStart(false);
+    }
+  };
 
   React.useEffect(() => {
-    setKey((prev) => prev + 1)
-    setPause(false)
-  }, [timerDuration])
+    setIsBreak(false);
+    setKey((prev) => prev + 1);
+    setPause(false);
+    setInitialStart(false);
+  }, [focusDuration, breakDuration, rounds]);
 
   const time = ({ remainingTime }) => {
-    const minutes = Math.floor(remainingTime / 60)
-    const seconds = Math.floor(remainingTime % 60)
+    const minutes = Math.floor(remainingTime / 60);
+    const seconds = Math.floor(remainingTime % 60);
 
     return (
       <div>
@@ -29,8 +49,8 @@ export default function Timer({
           {seconds > 9 ? seconds : "0" + seconds}
         </span>
       </div>
-    )
-  }
+    );
+  };
 
   return (
     <>
@@ -41,28 +61,45 @@ export default function Timer({
       >
         <div className={styles.wrapper}>
           <div className={styles.timerShadow}></div>
-          <CountdownCircleTimer
-            key={key}
-            size={250}
-            strokeLinecap={"square"}
-            strokeWidth={15}
-            isPlaying={pause}
-            duration={timerDuration * 60}
-            trailColor={"#571A1A"}
-            colors={["#F05454"]}
-            // onComplete={() => ({ shouldRepeat: true, delay: 1 })}
-          >
-            {time}
-          </CountdownCircleTimer>
+          {!isBreak ? (
+            <CountdownCircleTimer
+              key={key}
+              size={250}
+              strokeLinecap={"square"}
+              strokeWidth={15}
+              isPlaying={pause}
+              duration={focusDuration * 60}
+              trailColor={"#571A1A"}
+              colors={["#F05454"]}
+              onComplete={onComplete}
+            >
+              {time}
+            </CountdownCircleTimer>
+          ) : (
+            <CountdownCircleTimer
+              key={key + 1}
+              size={250}
+              strokeLinecap={"square"}
+              strokeWidth={15}
+              isPlaying={pause}
+              duration={breakDuration * 60}
+              trailColor={"#597752"}
+              colors={["#9DDA8E"]}
+              onComplete={onComplete}
+            >
+              {time}
+            </CountdownCircleTimer>
+          )}
+
           <Buttons
             pause={pause}
             setPause={setPause}
-            timerDuration={timerDuration}
+            onComplete={onComplete}
             initialStart={initialStart}
             setInitialStart={setInitialStart}
           />
         </div>
       </motion.div>
     </>
-  )
+  );
 }

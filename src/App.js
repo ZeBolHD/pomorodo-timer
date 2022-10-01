@@ -1,7 +1,7 @@
-import React from "react"
-import "./App.scss"
-import Pomodoro from "./components/PomodoroApp/Pomodoro"
+import React from "react";
+import "./App.scss";
+import Pomodoro from "./components/Pomodoro/Pomodoro";
 
 export default function App() {
-  return <Pomodoro />
+  return <Pomodoro />;
 }
