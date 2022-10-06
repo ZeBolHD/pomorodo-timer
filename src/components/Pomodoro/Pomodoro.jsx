@@ -7,21 +7,6 @@ import Settings from "../Settings/Settings";
 import NavBar from "../NavBar/NavBar";
 
 export default function Pomodoro() {
-  const focusLength =
-    localStorage.getItem("focusLength") == null
-      ? localStorage.setItem("focusLength", 30)
-      : JSON.parse(localStorage.getItem("focusLength"));
-
-  const breakLength =
-    localStorage.getItem("breakLength") == null
-      ? localStorage.setItem("breakLength", 30)
-      : JSON.parse(localStorage.getItem("breakLength"));
-
-  const roundsCount =
-    localStorage.getItem("roundsCount") == null
-      ? localStorage.setItem("roundsCount", 2)
-      : JSON.parse(localStorage.getItem("roundsCount"));
-
   const [focusDuration, setFocusDuration] = React.useState(30);
   const [breakDuration, setBreakDuration] = React.useState(10);
   const [rounds, setRounds] = React.useState(2);

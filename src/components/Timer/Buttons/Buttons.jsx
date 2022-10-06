@@ -33,9 +33,11 @@ export default function Buttons({
   onComplete,
   initialStart,
   setInitialStart,
+  playFocus,
 }) {
   const start = () => {
     !initialStart && setInitialStart(!initialStart);
+    !initialStart && playFocus();
     setPause(!pause);
   };
 

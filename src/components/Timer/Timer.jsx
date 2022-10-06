@@ -2,7 +2,12 @@ import React from "react";
 import styles from "./Timer.module.scss";
 import { motion } from "framer-motion";
 import { CountdownCircleTimer } from "react-countdown-circle-timer";
+import useSound from "use-sound";
+
 import Buttons from "./Buttons/Buttons";
+
+import soundFocus from "../Sounds/focus.mp3";
+import soundBreak from "../Sounds/break.mp3";
 
 export default function Timer({
   rounds,
@@ -19,11 +24,18 @@ export default function Timer({
 
   const [roundCurrent, setRoundCurrent] = React.useState(1);
 
+  const [playFocus] = useSound(soundFocus, { volume: 0.65 });
+  const [playBreak] = useSound(soundBreak, { volume: 0.65 });
+
   const onComplete = () => {
     setRoundCurrent((prev) => prev + 1);
     if (roundCurrent < rounds * 2 - 1) {
+      isBreak && playFocus();
+      !isBreak && playBreak();
+      !pause && setPause(true);
       setIsBreak(!isBreak);
     } else {
+      playBreak();
       setRoundCurrent(1);
       setKey((prev) => prev + 1);
       setPause(false);
@@ -97,6 +109,7 @@ export default function Timer({
             onComplete={onComplete}
             initialStart={initialStart}
             setInitialStart={setInitialStart}
+            playFocus={playFocus}
           />
         </div>
       </motion.div>
