@@ -6,8 +6,8 @@ import useSound from "use-sound";
 
 import Buttons from "./Buttons/Buttons";
 
-import soundFocus from "../Sounds/focus.mp3";
-import soundBreak from "../Sounds/break.mp3";
+import soundFocus from "./Sounds/focus.mp3";
+import soundBreak from "./Sounds/break.mp3";
 
 export default function Timer({
   rounds,
