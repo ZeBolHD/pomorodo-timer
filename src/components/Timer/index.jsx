@@ -4,24 +4,30 @@ import { motion } from "framer-motion";
 import { CountdownCircleTimer } from "react-countdown-circle-timer";
 import useSound from "use-sound";
 
+import { useSelector, useDispatch } from "react-redux";
+import {
+  setIsBreak,
+  setOnComplete,
+} from "../../redux/slices/headerStatusSlice";
+
 import Buttons from "./Buttons/Buttons";
 
 import soundFocus from "./Sounds/focus.mp3";
 import soundBreak from "./Sounds/break.mp3";
 
-export default function Timer({
-  rounds,
-  focusDuration,
-  breakDuration,
-  isBreak,
-  setIsBreak,
-  activeTab,
-  initialStart,
-  setInitialStart,
-}) {
+export default function Timer() {
+  const { breakDuration, focusDuration, rounds } = useSelector(
+    (state) => state.timerSettings
+  );
+
+  const { isBreak, isStarted, activeTab } = useSelector(
+    (state) => state.headerStatus
+  );
+
+  const dispatch = useDispatch();
+
   const [pause, setPause] = React.useState(false);
   const [key, setKey] = React.useState(0);
-
   const [roundCurrent, setRoundCurrent] = React.useState(1);
 
   const [playFocus] = useSound(soundFocus, { volume: 0.65 });
@@ -33,21 +39,20 @@ export default function Timer({
       isBreak && playFocus();
       !isBreak && playBreak();
       !pause && setPause(true);
-      setIsBreak(!isBreak);
+      dispatch(setIsBreak(!isBreak));
     } else {
       playBreak();
       setRoundCurrent(1);
       setKey((prev) => prev + 1);
       setPause(false);
-      setInitialStart(false);
+      dispatch(setOnComplete());
     }
   };
 
   React.useEffect(() => {
-    setIsBreak(false);
     setKey((prev) => prev + 1);
     setPause(false);
-    setInitialStart(false);
+    dispatch(setOnComplete());
   }, [focusDuration, breakDuration, rounds]);
 
   const time = ({ remainingTime }) => {
@@ -107,8 +112,6 @@ export default function Timer({
             pause={pause}
             setPause={setPause}
             onComplete={onComplete}
-            initialStart={initialStart}
-            setInitialStart={setInitialStart}
             playFocus={playFocus}
           />
         </div>

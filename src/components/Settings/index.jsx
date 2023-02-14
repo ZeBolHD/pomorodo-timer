@@ -2,15 +2,24 @@ import React from "react";
 import styles from "./Settings.module.scss";
 import { AnimatePresence, motion } from "framer-motion";
 
-export default function AppSettings({
-  activeTab,
-  focusDuration,
-  setFocusDuration,
-  breakDuration,
+import { useDispatch, useSelector } from "react-redux";
+import {
   setBreakDuration,
-  rounds,
+  setFocusDuration,
   setRounds,
-}) {
+} from "../../redux/slices/timerSettingsSlice";
+
+export default function Settings() {
+  const { breakDuration, focusDuration, rounds } = useSelector(
+    (state) => state.timerSettings
+  );
+
+  console.log(123);
+
+  const { activeTab } = useSelector((state) => state.headerStatus);
+
+  const dispatch = useDispatch();
+
   return (
     <AnimatePresence>
       {!activeTab && (
@@ -35,7 +44,7 @@ export default function AppSettings({
               min={5}
               max={60}
               value={focusDuration}
-              onChange={(e) => setFocusDuration(e.target.value)}
+              onChange={(e) => dispatch(setFocusDuration(e.target.value))}
             />
           </div>
           <div className={styles.setting}>
@@ -52,7 +61,7 @@ export default function AppSettings({
               min={5}
               max={60}
               value={breakDuration}
-              onChange={(e) => setBreakDuration(e.target.value)}
+              onChange={(e) => dispatch(setBreakDuration(e.target.value))}
             />
           </div>
           <div className={styles.setting}>
@@ -71,7 +80,7 @@ export default function AppSettings({
               min={1}
               max={5}
               value={rounds}
-              onChange={(e) => setRounds(e.target.value)}
+              onChange={(e) => dispatch(setRounds(e.target.value))}
             />
           </div>
         </motion.div>

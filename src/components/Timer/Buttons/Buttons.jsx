@@ -2,6 +2,12 @@ import React from "react";
 import styles from "./Buttons.module.scss";
 import { motion } from "framer-motion";
 
+import {
+  setIsStarted,
+  setIsFocus,
+} from "../../../redux/slices/headerStatusSlice";
+import { useSelector, useDispatch } from "react-redux";
+
 import PauseBtn from "./Icons/PauseBtn";
 import StartBtn from "./Icons/StartBtn";
 import RewindBtn from "./Icons/RewindBtn";
@@ -27,17 +33,18 @@ const variants = {
   },
 };
 
-export default function Buttons({
-  pause,
-  setPause,
-  onComplete,
-  initialStart,
-  setInitialStart,
-  playFocus,
-}) {
+export default function Buttons({ pause, setPause, onComplete, playFocus }) {
+  const { isStarted } = useSelector((state) => state.headerStatus);
+
+  const dispatch = useDispatch();
+
   const start = () => {
-    !initialStart && setInitialStart(!initialStart);
-    !initialStart && playFocus();
+    if (!isStarted) {
+      dispatch(setIsStarted(!isStarted));
+      playFocus();
+      dispatch(setIsFocus(true));
+    }
+
     setPause(!pause);
   };
 
@@ -47,14 +54,14 @@ export default function Buttons({
         style={{ position: "relative" }}
         variants={variants}
         initial="beforeStartLeft"
-        animate={!initialStart ? "beforeStartLeft" : "afterStartLeft"}
+        animate={!isStarted ? "beforeStartLeft" : "afterStartLeft"}
         transition={{ type: "spring", damping: 20, stiffness: 350 }}
         onClick={start}
       >
         {!pause ? <StartBtn /> : <PauseBtn />}
       </motion.div>
 
-      {initialStart && (
+      {isStarted && (
         <motion.div
           variants={variants}
           initial="beforeStartRight"

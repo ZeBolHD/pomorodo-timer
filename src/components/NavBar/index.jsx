@@ -1,5 +1,10 @@
 import React from "react";
 import { motion } from "framer-motion";
+
+import { useSelector, useDispatch } from "react-redux";
+
+import { setActiveTab } from "../../redux/slices/headerStatusSlice";
+
 import styles from "./NavBar.module.scss";
 
 import SettingsBtn from "./Icons/SettingsBtn";
@@ -15,7 +20,11 @@ const variants = {
   },
 };
 
-export default function NavBar({ activeTab, setActiveTab }) {
+export default function NavBar() {
+  const { activeTab } = useSelector((state) => state.headerStatus);
+
+  const dispatch = useDispatch();
+
   return (
     <nav className={styles.nav}>
       <motion.div
@@ -29,12 +38,16 @@ export default function NavBar({ activeTab, setActiveTab }) {
           stiffness: 400,
         }}
       ></motion.div>
-
-      <div className={styles.button} onClick={() => setActiveTab(false)}>
+      <div
+        onClick={() => dispatch(setActiveTab(false))}
+        className={styles.button}
+      >
         <SettingsBtn />
       </div>
-
-      <div className={styles.button} onClick={() => setActiveTab(true)}>
+      <div
+        onClick={() => dispatch(setActiveTab(true))}
+        className={styles.button}
+      >
         <TimerBtn />
       </div>
     </nav>
