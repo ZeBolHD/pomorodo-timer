@@ -4,34 +4,31 @@ import { motion } from "framer-motion";
 import { CountdownCircleTimer } from "react-countdown-circle-timer";
 import useSound from "use-sound";
 
-import { useSelector, useDispatch } from "react-redux";
-import {
-  setIsBreak,
-  setOnComplete,
-} from "../../redux/slices/headerStatusSlice";
+import { useSelector } from "react-redux";
+import { setIsBreak, setOnComplete } from "../../redux/headerStatus/slice";
 
 import Buttons from "./Buttons/Buttons";
 
 import soundFocus from "./Sounds/focus.mp3";
 import soundBreak from "./Sounds/break.mp3";
+import { selectTimerSettings } from "../../redux/timerSettings/selectors";
+import { selectHeaderStatus } from "../../redux/headerStatus/selectors";
+import { useAppDispatch } from "../../redux/store";
 
 export default function Timer() {
-  const { breakDuration, focusDuration, rounds } = useSelector(
-    (state) => state.timerSettings
-  );
+  const { breakDuration, focusDuration, rounds } =
+    useSelector(selectTimerSettings);
 
-  const { isBreak, isStarted, activeTab } = useSelector(
-    (state) => state.headerStatus
-  );
+  const { isBreak, activeTab } = useSelector(selectHeaderStatus);
 
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   const [pause, setPause] = React.useState(false);
   const [key, setKey] = React.useState(0);
   const [roundCurrent, setRoundCurrent] = React.useState(1);
 
-  const [playFocus] = useSound(soundFocus, { volume: 0.65 });
-  const [playBreak] = useSound(soundBreak, { volume: 0.65 });
+  const [playFocus] = useSound(soundFocus, { volume: 0.7 });
+  const [playBreak] = useSound(soundBreak, { volume: 0.7 });
 
   const onComplete = () => {
     setRoundCurrent((prev) => prev + 1);
@@ -55,7 +52,7 @@ export default function Timer() {
     dispatch(setOnComplete());
   }, [focusDuration, breakDuration, rounds]);
 
-  const time = ({ remainingTime }) => {
+  const time: React.FC<{ remainingTime: number }> = ({ remainingTime }) => {
     const minutes = Math.floor(remainingTime / 60);
     const seconds = Math.floor(remainingTime % 60);
 
@@ -87,7 +84,7 @@ export default function Timer() {
               isPlaying={pause}
               duration={focusDuration * 60}
               trailColor={"#571A1A"}
-              colors={["#F05454"]}
+              colors={"#F05454"}
               onComplete={onComplete}
             >
               {time}
@@ -101,7 +98,7 @@ export default function Timer() {
               isPlaying={pause}
               duration={breakDuration * 60}
               trailColor={"#597752"}
-              colors={["#9DDA8E"]}
+              colors={"#9DDA8E"}
               onComplete={onComplete}
             >
               {time}

@@ -3,12 +3,12 @@ import { motion } from "framer-motion";
 
 import { useSelector, useDispatch } from "react-redux";
 
-import { setActiveTab } from "../../redux/slices/headerStatusSlice";
+import { setActiveTab } from "../../redux/headerStatus/slice";
 
 import styles from "./NavBar.module.scss";
 
-import SettingsBtn from "./Icons/SettingsBtn";
-import TimerBtn from "./Icons/TimerBtn";
+import { SettingsBtn, TimerBtn } from "./Icons";
+import { selectHeaderStatus } from "../../redux/headerStatus/selectors";
 
 const variants = {
   timerActive: {
@@ -20,8 +20,8 @@ const variants = {
   },
 };
 
-export default function NavBar() {
-  const { activeTab } = useSelector((state) => state.headerStatus);
+const NavBar: React.FC = () => {
+  const { activeTab } = useSelector(selectHeaderStatus);
 
   const dispatch = useDispatch();
 
@@ -52,4 +52,6 @@ export default function NavBar() {
       </div>
     </nav>
   );
-}
+};
+
+export default NavBar;

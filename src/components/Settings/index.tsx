@@ -2,23 +2,23 @@ import React from "react";
 import styles from "./Settings.module.scss";
 import { AnimatePresence, motion } from "framer-motion";
 
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import {
   setBreakDuration,
   setFocusDuration,
   setRounds,
-} from "../../redux/slices/timerSettingsSlice";
+} from "../../redux/timerSettings/slice";
+import { selectTimerSettings } from "../../redux/timerSettings/selectors";
+import { selectHeaderStatus } from "../../redux/headerStatus/selectors";
+import { useAppDispatch } from "../../redux/store";
 
-export default function Settings() {
-  const { breakDuration, focusDuration, rounds } = useSelector(
-    (state) => state.timerSettings
-  );
+const Settings: React.FC = () => {
+  const { breakDuration, focusDuration, rounds } =
+    useSelector(selectTimerSettings);
 
-  console.log(123);
+  const { activeTab } = useSelector(selectHeaderStatus);
 
-  const { activeTab } = useSelector((state) => state.headerStatus);
-
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   return (
     <AnimatePresence>
@@ -87,4 +87,6 @@ export default function Settings() {
       )}
     </AnimatePresence>
   );
-}
+};
+
+export default Settings;

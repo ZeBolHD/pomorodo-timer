@@ -3,11 +3,10 @@ import { AnimatePresence, motion } from "framer-motion";
 import styles from "./Header.module.scss";
 
 import { useSelector } from "react-redux";
+import { selectHeaderStatus } from "../../redux/headerStatus/selectors";
 
-export default function Header() {
-  const { activeTab, isBreak, isFocus } = useSelector(
-    (state) => state.headerStatus
-  );
+const Header: React.FC = () => {
+  const { activeTab, isBreak, isFocus } = useSelector(selectHeaderStatus);
 
   return (
     <div className={styles.header}>
@@ -99,4 +98,5 @@ export default function Header() {
       </AnimatePresence>
     </div>
   );
-}
+};
+export default Header;

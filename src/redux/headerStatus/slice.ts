@@ -1,6 +1,7 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { IHeaderStatus } from "./types";
 
-const initialState = {
+const initialState: IHeaderStatus = {
   activeTab: true,
   isStarted: false,
   isFocus: false,
@@ -11,16 +12,16 @@ const headerStatusSlice = createSlice({
   initialState,
   name: "header",
   reducers: {
-    setActiveTab(state, action) {
+    setActiveTab(state, action: PayloadAction<boolean>) {
       state.activeTab = action.payload;
     },
-    setIsFocus(state, action) {
+    setIsFocus(state, action: PayloadAction<boolean>) {
       state.isFocus = action.payload;
     },
-    setIsBreak(state, action) {
+    setIsBreak(state, action: PayloadAction<boolean>) {
       state.isBreak = action.payload;
     },
-    setIsStarted(state, action) {
+    setIsStarted(state, action: PayloadAction<boolean>) {
       state.isStarted = action.payload;
     },
     setOnComplete(state) {

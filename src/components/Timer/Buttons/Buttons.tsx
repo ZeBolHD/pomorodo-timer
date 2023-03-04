@@ -1,16 +1,13 @@
-import React from "react";
+import React, { SetStateAction } from "react";
 import styles from "./Buttons.module.scss";
 import { motion } from "framer-motion";
 
-import {
-  setIsStarted,
-  setIsFocus,
-} from "../../../redux/slices/headerStatusSlice";
-import { useSelector, useDispatch } from "react-redux";
+import { setIsStarted, setIsFocus } from "../../../redux/headerStatus/slice";
+import { useSelector } from "react-redux";
 
-import PauseBtn from "./Icons/PauseBtn";
-import StartBtn from "./Icons/StartBtn";
-import RewindBtn from "./Icons/RewindBtn";
+import { StartBtn, PauseBtn, RewindBtn } from "./Icons";
+import { selectHeaderStatus } from "../../../redux/headerStatus/selectors";
+import { useAppDispatch } from "../../../redux/store";
 
 const variants = {
   beforeStartLeft: {
@@ -33,10 +30,22 @@ const variants = {
   },
 };
 
-export default function Buttons({ pause, setPause, onComplete, playFocus }) {
-  const { isStarted } = useSelector((state) => state.headerStatus);
+interface IButtonsProps {
+  pause: boolean;
+  setPause: React.Dispatch<SetStateAction<boolean>>;
+  onComplete: () => void;
+  playFocus: () => void;
+}
 
-  const dispatch = useDispatch();
+const Buttons: React.FC<IButtonsProps> = ({
+  pause,
+  setPause,
+  onComplete,
+  playFocus,
+}) => {
+  const { isStarted } = useSelector(selectHeaderStatus);
+
+  const dispatch = useAppDispatch();
 
   const start = () => {
     if (!isStarted) {
@@ -74,4 +83,6 @@ export default function Buttons({ pause, setPause, onComplete, playFocus }) {
       )}
     </div>
   );
-}
+};
+
+export default Buttons;

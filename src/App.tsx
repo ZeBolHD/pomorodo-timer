@@ -1,8 +1,6 @@
-import React from "react";
-
 import "./App.scss";
 import Pomodoro from "./components/Pomodoro";
 
-export default function App() {
+export const App: React.FC = () => {
   return <Pomodoro />;
-}
+};

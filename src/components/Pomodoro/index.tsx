@@ -7,7 +7,7 @@ import Timer from "../Timer";
 import Settings from "../Settings";
 import NavBar from "../NavBar";
 
-export default function Pomodoro() {
+const Pomodoro: React.FC = () => {
   return (
     <div className={styles.wrapper}>
       <Header />
@@ -20,4 +20,6 @@ export default function Pomodoro() {
       <NavBar />
     </div>
   );
-}
+};
+
+export default Pomodoro;
