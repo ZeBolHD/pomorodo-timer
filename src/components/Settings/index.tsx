@@ -3,22 +3,35 @@ import styles from "./Settings.module.scss";
 import { AnimatePresence, motion } from "framer-motion";
 
 import { useSelector } from "react-redux";
-import {
-  setBreakDuration,
-  setFocusDuration,
-  setRounds,
-} from "../../redux/timerSettings/slice";
-import { selectTimerSettings } from "../../redux/timerSettings/selectors";
+import { setTimerSettings } from "../../redux/timerSettings/slice";
 import { selectHeaderStatus } from "../../redux/headerStatus/selectors";
 import { useAppDispatch } from "../../redux/store";
+import debounce from "lodash.debounce";
 
 const Settings: React.FC = () => {
-  const { breakDuration, focusDuration, rounds } =
-    useSelector(selectTimerSettings);
-
   const { activeTab } = useSelector(selectHeaderStatus);
 
   const dispatch = useAppDispatch();
+
+  const [focusValue, setFocusValue] = React.useState(30);
+  const [breakValue, setBreakValue] = React.useState(10);
+  const [roundsValue, setRoundsValue] = React.useState(3);
+
+  const updateTimerSettings = React.useCallback(
+    debounce((settings) => {
+      dispatch(setTimerSettings(settings));
+    }, 750),
+    []
+  );
+
+  React.useEffect(() => {
+    const settings = {
+      focusDuration: focusValue,
+      breakDuration: breakValue,
+      rounds: roundsValue,
+    };
+    updateTimerSettings(settings);
+  }, [focusValue, breakValue, roundsValue]);
 
   return (
     <AnimatePresence>
@@ -32,55 +45,55 @@ const Settings: React.FC = () => {
         >
           <div className={styles.setting}>
             <h2>Focus</h2>
-            <span>{focusDuration}:00</span>
+            <span>{focusValue}:00</span>
             <input
               style={{
                 background: `linear-gradient(90deg, var(--color-input-bg-progress)${
-                  (focusDuration / 60) * 185 - 13
+                  (focusValue / 60) * 185 - 13
                 }px, var(--color-primary-dark) 0%`,
               }}
               type="range"
               step={5}
               min={5}
               max={60}
-              value={focusDuration}
-              onChange={(e) => dispatch(setFocusDuration(e.target.value))}
+              value={focusValue}
+              onChange={(e) => setFocusValue(+e.target.value)}
             />
           </div>
           <div className={styles.setting}>
             <h2>Break</h2>
-            <span>{breakDuration}:00</span>
+            <span>{breakValue}:00</span>
             <input
               style={{
                 background: `linear-gradient(90deg, var(--color-input-bg-progress)${
-                  (breakDuration / 60) * 185 - 13
+                  (breakValue / 60) * 185 - 13
                 }px, var(--color-primary-dark) 0%`,
               }}
               type="range"
               step={5}
               min={5}
               max={60}
-              value={breakDuration}
-              onChange={(e) => dispatch(setBreakDuration(e.target.value))}
+              value={breakValue}
+              onChange={(e) => setBreakValue(+e.target.value)}
             />
           </div>
           <div className={styles.setting}>
             <h2>Rounds</h2>
-            <span>{rounds}</span>
+            <span>{roundsValue}</span>
             <input
               style={{
                 background: `linear-gradient(90deg, var(--color-input-bg-progress)${
-                  (rounds / 5) * 185 - 5 * rounds > 65
-                    ? (rounds / 5) * 185 - 13
-                    : (rounds / 5) * 185 - 30
+                  (roundsValue / 5) * 185 - 5 * roundsValue > 65
+                    ? (roundsValue / 5) * 185 - 13
+                    : (roundsValue / 5) * 185 - 30
                 }px, var(--color-primary-dark) 0%`,
               }}
               type="range"
               step={1}
               min={1}
               max={5}
-              value={rounds}
-              onChange={(e) => dispatch(setRounds(e.target.value))}
+              value={roundsValue}
+              onChange={(e) => setRoundsValue(+e.target.value)}
             />
           </div>
         </motion.div>

@@ -11,19 +11,14 @@ const timerSettingsSlice = createSlice({
   name: "timerSettings",
   initialState,
   reducers: {
-    setRounds(state, action: PayloadAction<string>) {
-      state.rounds = +action.payload;
-    },
-    setBreakDuration(state, action: PayloadAction<string>) {
-      state.breakDuration = +action.payload;
-    },
-    setFocusDuration(state, action: PayloadAction<string>) {
-      state.focusDuration = +action.payload;
+    setTimerSettings(state, action: PayloadAction<ITimerSettings>) {
+      state.focusDuration = action.payload.focusDuration;
+      state.breakDuration = action.payload.breakDuration;
+      state.rounds = action.payload.rounds;
     },
   },
 });
 
-export const { setRounds, setBreakDuration, setFocusDuration } =
-  timerSettingsSlice.actions;
+export const { setTimerSettings } = timerSettingsSlice.actions;
 
 export default timerSettingsSlice.reducer;
