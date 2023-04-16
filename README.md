@@ -1,6 +1,3 @@
-<p align="center">
-   <img src="https://github.com/MartinRybergLaude/pomorodo-timer/blob/master/public/favicon.ico?raw=true" width="80" alt="">
-</p>
 <h1 align="center">
   Pomorodo
 </h1>
@@ -44,7 +41,7 @@
 
 ## 🧐 Technologies
 
-- React.js
+- ReactJS
 - Redux Toolkit
 - Framer-Motion
 - React Countdown Circle Timer
