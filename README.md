@@ -1,3 +1,6 @@
+<p align="center">
+  <img src="https://github.com/ZeBolHD/pomorodo-timer/assets/104273871/03272fd1-f90f-4c68-88b1-1f5f42e567bd" width="80" alt=""/>
+</p>
 <h1 align="center">
   Pomorodo
 </h1>
