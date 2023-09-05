@@ -1,8 +1,10 @@
 <h1 align="center">
   Pomorodo
 </h1>
+[Icon](https://github.com/ZeBolHD/pomorodo-timer/assets/104273871/39f1dddb-cc0a-4df1-bfe8-0fb0cd9ee7d3)
 <p align="center">
-  A productivity timer app built as a Progressive Web App, powered by React.
+  A productivity timer app built as a Progressive Web App, powered by React!
+.
 </p>
 
 
